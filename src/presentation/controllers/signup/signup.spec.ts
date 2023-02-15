@@ -199,4 +199,19 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new ServerError())
     expect(httpResponse.body).toBeInstanceOf(ServerError)
   })
+
+  test('Should return 200 if valid is provided', () => {
+    const { sut } = makeSut()
+
+    const httpRequest = {
+      body: {
+        name: 'John',
+        email: 'email@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+  })
 })
